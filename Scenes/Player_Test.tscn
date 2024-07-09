@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1l2up1o8itvu"]
+
+[ext_resource type="Material" uid="uid://dq2ruucxeeocy" path="res://new_standard_material_3d.tres" id="1_bchqp"]
+[ext_resource type="Script" path="res://Scripts/CameraHandler.gd" id="1_ra0lo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tmvl3"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lm430"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.515292, 0.857014, 0, -0.857014, 0.515292, 0.734805, 6.96855, 10.1282)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49088, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_tmvl3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_lm430")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D"]
+spring_length = 4.76
+
+[node name="CamRoot" type="Node3D" parent="CharacterBody3D/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.565, 1.205, 3.901)
+script = ExtResource("1_ra0lo")
+
+[node name="Pitch" type="Node3D" parent="CharacterBody3D/SpringArm3D/CamRoot"]
+
+[node name="Raw" type="Node3D" parent="CharacterBody3D/SpringArm3D/CamRoot/Pitch"]
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/SpringArm3D/CamRoot/Pitch/Raw"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(6.94641, 0, 0, 0, -4.34342e-07, -1, 0, 9.93658, -4.37114e-08, 0, 0.248648, 0.300386)
+material_override = ExtResource("1_bchqp")
+use_collision = true
+size = Vector3(1, 1, 0.151855)
